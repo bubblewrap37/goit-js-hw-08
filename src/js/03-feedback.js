@@ -1,3 +1,6 @@
+import throttle from 'lodash.throttle';
+// ----------------------------------------------------
+
 const form = document.querySelector('.feedback-form');
 // ----------------------------------------------------
 
@@ -10,14 +13,14 @@ if (dataFromLocalStorage) {
 
 // ----------------------------------------------------
 
-const callbackFc = function (event) {
+const callbackFc = throttle(function (event) {
   const personalData = {
     email: event.currentTarget.elements.email.value,
     message: event.currentTarget.elements.message.value,
   };
   const personalDataString = JSON.stringify(personalData);
   localStorage.setItem('feedback-form-state', personalDataString);
-};
+}, 500);
 
 // ----------------------------------------------------
 
@@ -26,7 +29,7 @@ form.addEventListener('submit', createMessage);
 
 // ----------------------------------------------------
 
-function createMessage() {
+function createMessage(event) {
   event.preventDefault();
   const newMessage = {
     [form.elements.email.name]: form.elements.email.value,
