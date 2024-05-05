@@ -22,3 +22,17 @@ const callbackFc = function (event) {
 // ----------------------------------------------------
 
 form.addEventListener('input', callbackFc);
+form.addEventListener('submit', createMessage);
+
+// ----------------------------------------------------
+
+function createMessage() {
+  event.preventDefault();
+  const newMessage = {
+    [form.elements.email.name]: form.elements.email.value,
+    [form.elements.message.name]: form.elements.message.value,
+  };
+  console.log(newMessage);
+  form.reset();
+  localStorage.clear();
+}
