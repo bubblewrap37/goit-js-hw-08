@@ -5,8 +5,9 @@ const form = document.querySelector('.feedback-form');
 // ----------------------------------------------------
 
 const dataFromLocalStorage = localStorage.getItem('feedback-form-state');
-const dataFromLocalStorageObject = JSON.parse(dataFromLocalStorage);
 if (dataFromLocalStorage) {
+  const dataFromLocalStorageObject = JSON.parse(dataFromLocalStorage);
+
   form.elements.email.value = dataFromLocalStorageObject.email;
   form.elements.message.value = dataFromLocalStorageObject.message;
 }
