@@ -1,100 +1,122 @@
-# Parcel template
+**Read in other languages: [Русский](README.md), [Українська](README.ua.md),
+[English](README.en.md), [Español](README.es.md), [Polski](README.pl.md).**
 
-Este proyecto fue creado con Parcel. [Consulte la documentación](https://parceljs.org/).
-para conocer y personalizar las funciones adicionales.
+# Criterios de admisión
 
-## Preparación de un nuevo proyecto
+- Se ha creado el repositorio `goit-js-hw-08`.
+- Al entregar las tareas, existen dos enlaces: a los archivos de origen y el trabajo 
+  en la página de `GitHub Pages`.
+- Al visitar la página de trabajos en vivo, no hay errores ni advertencias en la consola.
+- El proyecto está construido con la ayuda de
+  [parcel-project-template](https://github.com/goitacademy/parcel-project-template).
+- El código es formateado por `Prettier`.
 
-1. Asegúrate de que la versión LTS de Node.js está instalada en tu equipo.
-   [Descárgala e instálala](https://nodejs.org/en/) si es necesario.
-2. Clona este repositorio.
-3. Cambie el nombre de la carpeta con `parcel-project-template` por el nombre de tu proyecto.
-4. Crea un nuevo repositorio vacío en GitHub.
-5. Abre el proyecto en VSCode, ejecuta el terminal y enlaza el proyecto con el repositorio de GitHub
-   [según las instrucciones](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#changing-a-remote-repositorys-url).
-6. Instala las dependencias del proyecto en el terminal con el comando `npm install`.
-7. Inicia el modo de desarrollo, ejecutando el comando `npm start`.
-8. Ve a la dirección [http://localhost:1234](http://localhost:1234) en tu navegador.
-   Esta página se recargará automáticamente después de guardar los cambios en los 
-   archivos del proyecto.
+## Archivos de inicio
 
-## Archivos y carpetas
+En la [carpeta src](./src) encontrará archivos de inicio con diseño, estilos y
+archivos de script conectados para cada trabajo. Cópielos en su proyecto,
+reemplazando completamente la carpeta `src` en
+[parcel-project-template](https://github.com/goitacademy/parcel-project-template).
+Para eso, descargue todo el repositorio como un archivo o use el
+[servicio DownGit](https://downgit.github.io/) para descargar una carpeta individual del
+depósito.
 
-- Todos los partials de los archivos de estilo deben estar en la carpeta `src/sass`
-  y ser importados en los archivos de estilos de la página. Por ejemplo, para
- `index.html` el archivo de estilos se llama `index.scss`.
-- Añade las imágenes a la carpeta `src/images`. El ensamblador las optimizará, 
-  pero sólo cuando se cargue la versión de producción del proyecto. Todo esto
-  se hace en la nube, para no sobrecargar tu ordenador, ya que puede tardar 
-  mucho en máquinas poco potentes.
+## Tarea 1 - biblioteca `SimpleLightbox`
 
-## Deploy
+Realice esta tarea en los archivos `01-gallery.html` y `01-gallery.js`. Divídalo en
+varias subtareas:
 
-Para configurar un proyecto para ser implementado, hay algunos pasos adicionales 
-para configurar tu repositorio. Ve a la pestaña `Settings` y en la subsección
-`Actions`, selecciona la opción `General`.
+1. Añada una biblioteca [SimpleLightbox](https://simplelightbox.com/) como
+   dependencia del proyecto usando `npm` (el enlace CDN de su último trabajo
+   ya no es necesario).
+2. Use el código JavaScript de su tarea anterior, pero refactorice
+   teniendo en cuenta que la biblioteca fue instalada a través de `npm`.
+   (sintaxis de import/export).
 
-![GitHub actions settings](./assets/actions-config-step-1.png)
+Para incluir el código CSS de la biblioteca en el proyecto, es necesario añadir otro
+import más, además de la descrita en la documentación.
 
-Baja hasta la última sección, asegurándote de que las opciones esten seleccionadas
-como en la siguiente imagen, y haz clic en `Save`. Sin estas opciones, la compilación
-no tendrá suficientes permisos para automatizar el proceso de implementación.
-
-![GitHub actions settings](./assets/actions-config-step-2.png)
-
-La versión de producción del proyecto se compilará e implementará automáticamente 
-en GitHub Pages, en la rama `gh-pages`, cada vez que se actualice la rama `main`.
-Por ejemplo, después de un push directo o de un pool request aceptado. Para
-ello, edita el campo `homepage` y el script `build` en el archivo `package.json`,
-sustituyendo `your_username` y `your_repo_name` por los tuyos propios, y envía
-los cambios a GitHub.
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/",
-"scripts": {
-  "build": "parcel build src/*.html --public-url /your_repo_name/"
-},
+```js
+// Descrito en la documentación
+import SimpleLightbox from 'simplelightbox';
+// Importación adicional de estilos
+import 'simplelightbox/dist/simple-lightbox.min.css';
 ```
 
-A continuación, hay que ir a la configuración del repositorio de GitHub 
-(`Settings` > `Pages`) y seleccionar que la versión de producción de los archivos
-se distribuya desde la carpeta `/root` de la rama `gh-pages`, si no se hizo automáticamente.
+## Tarea 2 - reproductor de vídeo
 
-![GitHub Pages settings](./assets/repo-settings.png)
+El HTML tiene un `<iframe>` con un vídeo para el reproductor de Vimeo. Escriba un script que
+guarda el tiempo de reproducción del vídeo actual en el almacenamiento local y en la
+recarga de la página, continúa reproduciendo el vídeo desde ese momento.
 
-### Estado del deploy
+```html
+<iframe
+  id="vimeo-player"
+  src="https://player.vimeo.com/video/236203659"
+  width="640"
+  height="360"
+  frameborder="0"
+  allowfullscreen
+  allow="autoplay; encrypted-media"
+></iframe>
+```
 
-El estado del deploy del último commit se indica con un icono junto a su identificador.
+Ejecute esta tarea en los archivos `02-video.html' y `02-video.js'. Divídalo en
+varias subtareas:
 
-- **Color amarillo** - el proyecto se está compilando y desplegando.
-- **Color verde** - el deploy se completó con éxito.
-- **Color rojo** - Se ha producido un error durante el linting, la compilación o el deploy.
+1. Ver más información sobre la
+   [documentación](https://github.com/vimeo/player.js/#vimeo-player-api)
+   de la biblioteca del reproductor Vimeo.
+2. Añada la biblioteca como dependencia del proyecto a través de `npm`.
+3. Inicialice el reproductor en el archivo de script como se describe en la sección
+   [pre-existing player](https://github.com/vimeo/player.js/#pre-existing-player),
+   pero tenga en cuenta que ha añadido el reproductor como un paquete npm, y no vía CDN.
+4. Ordene la documentación del método
+   [on()](https://github.com/vimeo/player.js/#onevent-string-callback-function-void)
+   y empiece a seguir el evento
+   [timeupdate](https://github.com/vimeo/player.js/#events), actualización del
+   tiempo de reproducción.
+5. Guarde el tiempo de reproducción en el almacenamiento local. Deje que la clave sea
+   la secuencia `"videoplayer-current-time"`.
+6. Al recargar la página, use el método
+   [setCurrentTime()](https://github.com/vimeo/player.js/#setcurrenttimeseconds-number-promisenumber-rangeerrorerror)
+   para reanudar la reproducción desde la posición guardada.
+7. Añada una biblioteca al proyecto
+   [lodash.throttle](https://www.npmjs.com/package/lodash.throttle) y asegúrese
+   que el tiempo de reproducción se actualice en la memoria no más de una vez por
+   por segundo.
 
-Se puede ver información de estado más detallada haciendo clic en el icono y 
-en el enlace `Details` de la ventana desplegable.
+## Tarea 3 - formulario Feedback
 
-![Deployment status](./assets/status.png)
+HTML tiene un diseño de formulario. Escriba un script que guarde los valores de los espacios
+en el almacenamiento local cuando el usuario escriba algo.
 
-### Página activa
+```html
+<form class="feedback-form" autocomplete="off">
+  <label>
+    Email
+    <input type="email" name="email" autofocus />
+  </label>
+  <label>
+    Message
+    <textarea name="message" rows="8"></textarea>
+  </label>
+  <button type="submit">Submit</button>
+</form>
+```
 
-Después de un tiempo, normalmente un par de minutos, la página activa se puede
-ver en la dirección especificada en la propiedad `homepage`. Por ejemplo, aquí
-está el enlace a la versión activa de este repositorio.
-[https://goitacademy.github.io/parcel-project-template](https://goitacademy.github.io/parcel-project-template).
+Ejecute esta tarea en los archivos `03-feedback.html` y `03-feedback.js`. Desglose
+en varias subtareas:
 
-Si se abre una página en blanco, asegúrese de que no haya errores en la pestaña
-`Console` relacionados con rutas incorrectas a los archivos CSS y JS del proyecto (**404**).
-Lo más probable es que tenga un valor incorrecto para la propiedad `homepage` o el 
-script `build` en el archivo `package.json`.
-
-## ¿Cómo funciona?
-
-![How it works](./assets/how-it-works.png)
-
-1. Después de cada push a la rama `main` del repositorio GitHub, se ejecuta un 
-   script especial (GitHub Action) del archivo `.github/workflows/deploy.yml`.
-2. Todos los archivos del repositorio se copian en el servidor, donde el 
-   proyecto se inicializa y se compila antes de ser desplegado.
-3. Si todos los pasos tienen éxito, la versión de producción compilada de los
-   archivos del proyecto se envía a la rama `gh-pages`. De lo contrario, el
-   registro de ejecución del script indicará cuál es el problema.
+1. Monitorizar el evento `input` en el formulario, y cada vez escribir en el almacenamiento
+   local en un objeto con los espacios `email` y `message`, en los que se almacenan los
+   valores de los espacios del formulario. Dejemos que la clave del repositorio sea la secuencia
+   `"feedback-form-state"`.
+2. Cuando la página se cargue, compruebe el estado del almacenamiento y si hay
+   datos guardados, rellene los espacios del formulario con ellos. En caso contrario, los espacios deben estar
+   vacíos.
+3. Al enviar el formulario, borre el almacenamiento y los campos del formulario, y emita un objeto con
+   los espacios `email` y `message` y sus valores actuales a la consola.
+4. Asegúrese de que el repositorio no se actualice con más frecuencia que una vez cada 500 milisegundos.
+   Para eso, añada al proyecto y use la biblioteca
+   [lodash.throttle](https://www.npmjs.com/package/lodash.throttle).

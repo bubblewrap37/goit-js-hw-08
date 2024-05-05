@@ -1,73 +1,78 @@
-# Parcel template
+**Read in other languages: [Русский](README.md), [Українська](README.ua.md), [English](README.en.md), [Español](README.es.md), [Polski](README.pl.md).**
 
-This project was created with Parcel. For familiarization and setting additional features [refer to documentation](https://parceljs.org/).
+# Acceptance criteria
 
-## Preparing a new project
+- `goit-js-hw-08` repository created.
+- In your submitted homework, there are two links: One to your source files and one to your working page on `GitHub Pages`.
+- During live page visits, there are no errors or warnings generated in the console.
+- Project built with [parcel-project-template](https://github.com/goitacademy/parcel-project-template).
+- Code formatted with `Prettier`.
 
-1. Make sure you have an LTS version of Node.js installed on your computer.
-   [Download and install](https://nodejs.org/en/) if needed.
-2. Clone this repository.
-3. Change the folder name from `parcel-project-template` to the name of your project.
-4. Create a new empty GitHub repository.
-5. Open the project in VSCode, launch the terminal and link the project to the GitHub repository
-   [by instructions](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#changing-a-remote-repositorys-url).
-6. Install the project's dependencies in the terminal with the `npm install` command.
-7. Start development mode by running the `npm start` command.
-8. Go to [http://localhost:1234](http://localhost:1234) in your browser.
-   This page will automatically reload after saving changes to the project files.
+## Start files
 
-## Files and folders
+In the [src folder](./src), you will find start files with ready-made markup, styles, and added script files for each task. Copy them to your project completely, replacing the `src` folder in [parcel-project-template](https://github.com/goitacademy/parcel-project-template). To do this, download this entire repository as an archive or use the [DownGit service](https://downgit.github.io/) to download a separate folder from the repository.
 
-- All stylesheet parshas should be in the `src/sass` folder and imported into the page stylesheets. For example, for `index.html` the style file is named `index.scss`.
-- Add images to the `src/images` folder. The assembler optimizes them, but only when deploying the production version of the project. All this happens in the cloud so as not to burden your computer, as it can take a long time on weak machines.
+## Task 1 - `SimpleLightbox` library
 
-## Deploy
+Do this task in the `01-gallery.html` and `01-gallery.js` files. Break it down into several subtasks:
 
-To set up a project deployment, you need to perform a few additional steps to set up your repository. Go to the `Settings` tab and in the `Actions` subsection select the `General` item.
+1. Add the [SimpleLightbox](https://simplelightbox.com/) library as a project dependency using `npm` (the CDN link from your past work is no longer needed).
+2. Use your JavaScript code from the previous homework, but refactor it given that the library was installed via `npm` (import/export syntax).
 
-![GitHub actions settings](./assets/actions-config-step-1.png)
+In order to add the CSS code of the library to the project, you need to add one more import, aside from the one described in the documentation.
 
-Scroll the page to the last section, in which make sure the options are selected as in the following image and click `Save`. Without these settings, the build will not have enough rights to automate the deployment process.
-
-![GitHub actions settings](./assets/actions-config-step-2.png)
-
-The production version of the project will be automatically built and deployed to GitHub Pages, in the `gh-pages` branch, every time the `main` branch is updated. For example, after a direct push or an accepted pull request. To do this, you need to edit the `homepage` field and the `build` script in the `package.json` file, replacing `your_username` and `your_repo_name` with your own, and submit the changes to GitHub.
-
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/",
-"scripts": {
-  "build": "parcel build src/*.html --public-url /your_repo_name/"
-},
+```js
+// Described in import SimpleLightbox from 'simplelightbox' documentation;
+// Additional styles import: import 'simplelightbox/dist/simple-lightbox.min.css';
 ```
 
-Next, you need to go to the settings of the GitHub repository (`Settings` > `Pages`) and set the distribution of the production version of files from the `/root` folder of the `gh-pages` branch, if this was not done automatically.
+## Task 2 - video player
 
-![GitHub Pages settings](./assets/repo-settings.png)
+In HTML, there is an `<iframe>` tag with video for Vimeo player. Write a script that will save the current video playback time to local storage and, upon page reload, continue to play the video from that time.
 
-### Deployment status
+```html
+<iframe
+  id="vimeo-player"
+  src="https://player.vimeo.com/video/236203659"
+  width="640"
+  height="360"
+  frameborder="0"
+  allowfullscreen
+  allow="autoplay; encrypted-media"
+></iframe>
+```
 
-The deployment status of the latest commit is displayed with an icon next to its ID.
+Do this task in the `02-video.html` and `02-video.js` files. Break it down into several subtasks:
 
-- **Yellow color** - the project is being built and deployed.
-- **Green color** - deployment completed successfully.
-- **Red color** - an error occurred during linting, build or deployment.
+1. Check out the [documentation](https://github.com/vimeo/player.js/#vimeo-player-api) of the Vimeo player library.
+2. Add the library as a project dependency via `npm`.
+3. Initialize the player in the script file as described in the [pre-existing player](https://github.com/vimeo/player.js/#pre-existing-player) section, but note that you have added the player as an npm package, not via CDN.
+4. Read the documentation of the [on()](https://github.com/vimeo/player.js/#onevent-string-callback-function-void) method and start tracking the [timeupdate](https://github.com/vimeo/player.js/#events) event - playback time update.
+5. Save playback time to local storage. Let the key for the storage be the `"videoplayer-current-time"` string.
+6. When reloading the page, use the [setCurrentTime()](https://github.com/vimeo/player.js/#setcurrenttimeseconds-number-promisenumber-rangeerrorerror) method to resume playback from the saved position.
+7. Add the [lodash.throttle](https://www.npmjs.com/package/lodash.throttle) library to the project and make sure that the playback time is updated in the storage once per second or less frequently.
 
-More detailed information about the status can be viewed by clicking on the icon, and in the drop-down window, follow the link `Details`.
+## Task 3 - feedback form
 
-![Deployment status](./assets/status.png)
+In HTML, there is form markup. Write a script that will save field values to local storage when the user types something.
 
-### Live page
+```html
+<form class="feedback-form" autocomplete="off">
+  <label>
+    Email
+    <input type="email" name="email" autofocus />
+  </label>
+  <label>
+    Message
+    <textarea name="message" rows="8"></textarea>
+  </label>
+  <button type="submit">Submit</button>
+</form>
+```
 
-After some time, usually a couple of minutes, the live page can be viewed at the address specified in the edited `homepage` property. For example, here is a link to a live version for this repository
-[https://goitacademy.github.io/parcel-project-template](https://goitacademy.github.io/parcel-project-template).
+Do this task in the `03-feedback.html` and `03-feedback.js` files. Break it down into several subtasks:
 
-If a blank page opens, make sure there are no errors in the `Console` tab related to incorrect paths to the CSS and JS files of the project (**404**). Most likely you have the wrong value for the `homepage` property or the `build` script in the `package.json` file.
-
-## How it works
-
-![How it works](./assets/how-it-works.png)
-
-1. After each push to the `main` branch of the GitHub repository, a special script (GitHub Action) is launched from the `.github/workflows/deploy.yml` file.
-2. All repository files are copied to the server, where the project is initialized and built before deployment.
-3. If all steps are successful, the built production version of the project files is sent to the `gh-pages` branch. Otherwise, the script execution log will indicate what the problem is.
+1. Track the `input` event on the form, and each time write to local storage an object with the `email` and `message` fields, in which you save the current values of the form fields. Let the key for the storage be the `"feedback-form-state"` string.
+2. When loading the page, check the state of the storage, and if it has stored some data, use it to fill in the form fields. Otherwise, the fields must be empty.
+3. When submitting the form, clear the storage and form fields and also display the object with the `email` and `message` fields, as well as their current values, in the console.
+4. Make sure that the storage is updated no more than once every 500 milliseconds. To do this, add the [lodash.throttle](https://www.npmjs.com/package/lodash.throttle) library to the project and use it.
