@@ -25,12 +25,20 @@ const callbackFc = throttle(function (event) {
 // ----------------------------------------------------
 
 form.addEventListener('input', callbackFc);
-form.addEventListener('submit', createMessage);
+form.addEventListener('submit', formValidate);
 
 // ----------------------------------------------------
 
-function createMessage(event) {
+function formValidate(event) {
   event.preventDefault();
+  if (form.elements.email.value === '' || form.elements.message.value === '') {
+    alert('some fields are empty');
+  } else {
+    createMessage();
+  }
+}
+
+function createMessage(event) {
   const newMessage = {
     [form.elements.email.name]: form.elements.email.value,
     [form.elements.message.name]: form.elements.message.value,
