@@ -13,14 +13,14 @@ if (dataFromLocalStorage) {
 
 // ----------------------------------------------------
 
-const callbackFc = throttle(function (event) {
+const callbackFc = function (event) {
   const personalData = {
     email: event.currentTarget.elements.email.value,
     message: event.currentTarget.elements.message.value,
   };
   const personalDataString = JSON.stringify(personalData);
   localStorage.setItem('feedback-form-state', personalDataString);
-}, 500);
+};
 
 // ----------------------------------------------------
 
