@@ -15,12 +15,14 @@ if (dataFromLocalStorage) {
 // ----------------------------------------------------
 
 const callbackFc = function (event) {
-  const personalData = {
-    email: event.currentTarget.elements.email.value,
-    message: event.currentTarget.elements.message.value,
-  };
-  const personalDataString = JSON.stringify(personalData);
+  const simpleEmail = event.currentTarget.elements.email;
+  const simpleMessage = event.currentTarget.elements.message;
   throttle(() => {
+    const personalData = {
+      email: simpleEmail.value,
+      message: simpleMessage.value,
+    };
+    const personalDataString = JSON.stringify(personalData);
     localStorage.setItem('feedback-form-state', personalDataString);
   }, 500);
 };
