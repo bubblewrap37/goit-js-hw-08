@@ -20,7 +20,9 @@ const callbackFc = function (event) {
     message: event.currentTarget.elements.message.value,
   };
   const personalDataString = JSON.stringify(personalData);
-  localStorage.setItem('feedback-form-state', personalDataString);
+  throttle(() => {
+    localStorage.setItem('feedback-form-state', personalDataString);
+  }, 500);
 };
 
 // ----------------------------------------------------
