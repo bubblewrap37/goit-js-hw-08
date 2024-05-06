@@ -2,29 +2,29 @@ import throttle from 'lodash.throttle';
 // ----------------------------------------------------
 
 const form = document.querySelector('.feedback-form');
+const inputEmail = form.elements.email;
+const inputMessage = form.elements.message;
 // ----------------------------------------------------
 
 const dataFromLocalStorage = localStorage.getItem('feedback-form-state');
 if (dataFromLocalStorage) {
   const dataFromLocalStorageObject = JSON.parse(dataFromLocalStorage);
 
-  form.elements.email.value = dataFromLocalStorageObject.email;
-  form.elements.message.value = dataFromLocalStorageObject.message;
+  inputEmail.value = dataFromLocalStorageObject.email;
+  inputMessage.value = dataFromLocalStorageObject.message;
 }
 
 // ----------------------------------------------------
-
-const callbackFc = function (event) {
-  const simpleEmail = event.currentTarget.elements.email;
-  const simpleMessage = event.currentTarget.elements.message;
-  throttle(() => {
-    const personalData = {
-      email: simpleEmail.value,
-      message: simpleMessage.value,
-    };
-    const personalDataString = JSON.stringify(personalData);
-    localStorage.setItem('feedback-form-state', personalDataString);
-  }, 500);
+const throttledCallbackFc = throttle(() => {
+  const personalData = {
+    email: inputEmail.value,
+    message: inputMessage.value,
+  };
+  const personalDataString = JSON.stringify(personalData);
+  localStorage.setItem('feedback-form-state', personalDataString);
+}, 500);
+const callbackFc = function (_event) {
+  throttledCallbackFc();
 };
 
 // ----------------------------------------------------
